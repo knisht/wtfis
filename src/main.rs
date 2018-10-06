@@ -89,7 +89,7 @@ fn parse(
     let node = handle;
     if let NodeData::Text { ref contents } = node.data {
         if is_important {
-            collector.push_str(&escape_default(&contents.borrow()));
+            collector.push_str(&contents.borrow());
         }
     }
 
@@ -120,10 +120,6 @@ fn parse(
             collector,
         );
     }
-}
-
-fn escape_default(s: &str) -> String {
-    s.chars().flat_map(|c| c.escape_default()).collect()
 }
 
 fn beautify(target: &String) -> String {
