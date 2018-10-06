@@ -1,0 +1,11 @@
+[package]
+name = "wtfis"
+version = "0.1.0"
+authors = ["Konstantin Nisht <zeron.n1@yandex.ru>"]
+
+[dependencies]
+hyper = "0.10.5"
+hyper-native-tls = "0.3.0"
+html5ever = "*"
+string_cache = "0.7.3"
+regex = "1.0.5"
