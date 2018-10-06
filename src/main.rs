@@ -1,3 +1,6 @@
+//! # WtfIs searcher
+//! This small program crawls interesting information from the web.
+
 extern crate html5ever;
 extern crate hyper;
 extern crate hyper_native_tls;
@@ -12,6 +15,8 @@ use hyper_native_tls::NativeTlsClient;
 use regex::Regex;
 use std::env;
 
+/// Driver for the entire program.
+/// It coordinates work between function and performs interaction with user.
 fn main() {
     let query = match parse_args() {
         Some(arg) => arg,
@@ -32,6 +37,7 @@ fn main() {
     println!("{}", result);
 }
 
+/// Command-line arguments parser.
 fn parse_args() -> Option<String> {
     let args: Vec<String> = env::args().collect();
     if args.len() == 1 {
@@ -41,6 +47,7 @@ fn parse_args() -> Option<String> {
     }
 }
 
+/// Querying websites for response.
 fn get_database_response(query: &str) -> Option<Handle> {
     let ssl = NativeTlsClient::new().unwrap();
     let connector = HttpsConnector::new(ssl);
@@ -62,6 +69,7 @@ fn get_database_response(query: &str) -> Option<Handle> {
     }
 }
 
+/// Parser driver.
 fn get_info(handle: Handle) -> String {
     let mut worth_starting = true;
     let mut result = String::new();
@@ -76,6 +84,7 @@ fn get_info(handle: Handle) -> String {
     result
 }
 
+/// Parser implementation. Must find correct info for user.
 fn parse(
     is_important: bool,
     is_searching_info: &mut bool,
@@ -122,6 +131,7 @@ fn parse(
     }
 }
 
+/// Removes useless references and information from plain website's text.
 fn beautify(target: &String) -> String {
     let mut consumer = String::new();
     {
