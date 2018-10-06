@@ -70,7 +70,7 @@ fn get_info(handle: Handle) -> String {
         false,
         &mut worth_starting,
         &mut next_ready,
-        handle,
+        &handle,
         &mut result,
     );
     result
@@ -80,7 +80,7 @@ fn parse(
     is_important: bool,
     is_searching_info: &mut bool,
     is_next_important: &mut bool,
-    handle: Handle,
+    handle: &Handle,
     collector: &mut String,
 ) {
     if !is_important && !*is_searching_info {
@@ -116,7 +116,7 @@ fn parse(
             next_command,
             is_searching_info,
             is_next_important,
-            child.clone(),
+            child,
             collector,
         );
     }
