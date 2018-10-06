@@ -7,4 +7,5 @@ Just type `whfis [subject]` into your terminal and one of the best knowledge dat
 
 Rust 1.29.0 required.
 Build sources by `cargo build --release`.
+Run by `cargo run`.
 You're welcome!
