@@ -4,7 +4,6 @@
 extern crate html5ever;
 extern crate hyper;
 extern crate hyper_native_tls;
-extern crate regex;
 extern crate string_cache;
 
 use html5ever::rcdom::{Handle, NodeData};
@@ -12,7 +11,6 @@ use html5ever::tendril::TendrilSink;
 use hyper::net::HttpsConnector;
 use hyper::Client;
 use hyper_native_tls::NativeTlsClient;
-use regex::Regex;
 use std::env;
 
 /// Driver for the entire program.
@@ -149,17 +147,14 @@ fn beautify(target: &String) -> String {
         }
     }
     let target = consumer;
-    let escaper = Regex::new(r"\\n").unwrap();
-    let spacer = Regex::new(r"  ").unwrap();
-    let comma_splitter = Regex::new(r" ,").unwrap();
-    let target = escaper.replace_all(&target, "");
-    let target = spacer.replace_all(&target, " ");
-    let target = comma_splitter.replace_all(&target, ",");
     if target.ends_with(":") {
         return String::from(
             "Your message was not recognised by database. \nPlease, correct it or enter another one.",
         );
     }
-    let target = target.replace("\\\"", "\"");
-    target.replace("\\'", "'")
+    target
+        .replace("\\\"", "\"")
+        .replace(" ,", ",")
+        .replace("  ", " ")
+        .replace("\\'", "'")
 }
